@@ -3,6 +3,7 @@ package com.example.dan.infshelper;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.*;
 import android.view.View;
 import android.widget.Toast;
@@ -22,6 +23,9 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        android.support.v7.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         Intent intent = getIntent();
         final String message = intent.getStringExtra(DetailActivity.EXTRA_MESSAGE);
         questions[0] = new Question(R.string.q1, true);

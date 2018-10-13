@@ -15,7 +15,7 @@ import android.widget.Toast;
 import static com.example.dan.infshelper.Database.getTopicArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "";
+    public static final String USER_ID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 Topic selectedItem = (Topic) parent.getItemAtPosition(position);
-                intent.putExtra(EXTRA_MESSAGE, selectedItem.getDegree());
+                intent.putExtra(USER_ID, selectedItem.getId() + "");
                 startActivity(intent);
                 overridePendingTransition(R.anim.enter, R.anim.exit);
 

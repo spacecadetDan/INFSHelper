@@ -22,16 +22,18 @@
             android:name=".MainActivity"
             android:label="INFSHelper"
             android:parentActivityName=".LaunchActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".DetailActivity"
             android:label="Topic Detail"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:label="Profession"
-                android:value="com.example.dan.infshelper.MainActivity" />
+                android:value="com.example.dan.infshelper.MainActivity"
+                android:theme="@style/AppTheme"/>
         </activity>
         <activity android:name=".QuizActivity"
             android:label="@string/quiz_name"></activity>

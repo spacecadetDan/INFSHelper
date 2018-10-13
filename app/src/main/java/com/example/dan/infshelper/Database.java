@@ -23,7 +23,7 @@ public class Database {
     }
 
     // Retrieves one 'Topic' object from the database by id
-    public static Topic getUserById(int id) {
+    public static Topic getTopicById(int id) {
         for (Topic u : topicArrayList) {
             if(u.getId() == id) {
                 return u;
