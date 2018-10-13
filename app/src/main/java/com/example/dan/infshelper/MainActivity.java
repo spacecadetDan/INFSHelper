@@ -10,8 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import static com.example.dan.infshelper.Database.getUserArrayList;
+import static com.example.dan.infshelper.Database.getTopicArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "";
@@ -25,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
         ListView lv = (ListView) findViewById(R.id.dynamicList);
 
-        ArrayAdapter<User> arrayAdapter = new ArrayAdapter<User>(
+        ArrayAdapter<Topic> arrayAdapter = new ArrayAdapter<Topic>(
                 this,
                 android.R.layout.simple_expandable_list_item_1,
-                getUserArrayList());
+                getTopicArrayList());
         lv.setAdapter(arrayAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                                     long id) {
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                User selectedItem = (User) parent.getItemAtPosition(position);
+                Topic selectedItem = (Topic) parent.getItemAtPosition(position);
                 intent.putExtra(EXTRA_MESSAGE, selectedItem.getDegree());
                 startActivity(intent);
                 overridePendingTransition(R.anim.enter, R.anim.exit);
@@ -49,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Dummy text", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Toast.makeText(MainActivity.this, "Click on a topic of interest", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
-
+    public static final String EXTRA_MESSAGE = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,12 +18,23 @@ public class DetailActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        final String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.resultText);
 
         textView.setText(message + " Professor");
+
+        Button quiz = findViewById(R.id.quizLaunch);
+            quiz.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(DetailActivity.this, QuizActivity.class);
+                    intent.putExtra(EXTRA_MESSAGE, message);
+                    startActivity(intent);
+                }
+            });
     }
 
     @Override
@@ -35,6 +48,8 @@ public class DetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                startActivity(intent);
                 //NavUtils.navigateUpFromSameTask(this);
                 finish();
                 overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
