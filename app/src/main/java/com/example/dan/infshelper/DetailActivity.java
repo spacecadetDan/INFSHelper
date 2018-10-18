@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.resultText);
         System.out.println("Topic ID, name and degree "+topic.getId()+" "+topic.getName()+" "+topic.getDegree());
 
-        textView.setText(topic.getDegree() + " Professor");
+        textView.setText(topic.getName());
 
         Button quiz = findViewById(R.id.quizLaunch);
             quiz.setOnClickListener(new View.OnClickListener() {

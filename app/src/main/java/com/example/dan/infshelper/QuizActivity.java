@@ -10,11 +10,10 @@ import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "";
-
+    public Question[] quizArray = new Question[5];
     private Button trueButton;
     private Button falseButton;
     private Button backButton;
-    public Question[] questions = new Question[3];
     public int score;
     public int i = 0;
     public boolean isTrue;
@@ -28,20 +27,19 @@ public class QuizActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String message = intent.getStringExtra(DetailActivity.EXTRA_MESSAGE);
-        questions[0] = new Question(R.string.q1, true);
-        questions[1] = new Question(R.string.q2, true);
-        questions[2] = new Question(R.string.q3, false);
-
+        QuizQuestions questions = new QuizQuestions();
+        quizArray = questions.questions;
+        questions.eventQuiz();
         question = findViewById(R.id.textView2);
-        question.setText(questions[i].getmTextResID());
-        isTrue = questions[i].getmAnswerTrue();
+        question.setText(quizArray[i].getmTextResID());
+        isTrue = quizArray[i].getmAnswerTrue();
         backButton = findViewById(R.id.backButton);
         trueButton = findViewById(R.id.trueButton);
 
         trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (i >= questions.length) {
+                if (i >= quizArray.length) {
                     onFinish();
                 } else {
                     if (isTrue) {
@@ -51,12 +49,12 @@ public class QuizActivity extends AppCompatActivity {
                         Toast.makeText(QuizActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
                     }
                     try {
-                        if(i == questions.length) {
+                        if(i == quizArray.length) {
                             onFinish();
                         } else {
                             i++;
-                            isTrue = questions[i].getmAnswerTrue();
-                            question.setText(questions[i].getmTextResID());
+                            isTrue = quizArray[i].getmAnswerTrue();
+                            question.setText(quizArray[i].getmTextResID());
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
                         e.printStackTrace();
@@ -80,12 +78,12 @@ public class QuizActivity extends AppCompatActivity {
                 }
 
                 try {
-                    if(i == questions.length) {
+                    if(i == quizArray.length) {
                         onFinish();
                     } else {
                         i++;
-                        isTrue = questions[i].getmAnswerTrue();
-                        question.setText(questions[i].getmTextResID());
+                        isTrue = quizArray[i].getmAnswerTrue();
+                        question.setText(quizArray[i].getmTextResID());
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     e.printStackTrace();
