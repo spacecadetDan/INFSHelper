@@ -8,29 +8,32 @@
     <string name="q1_3">Arguments to methods always appear within brackets</string>
     <string name="q1_4">When you invoke a method with a parameter, the value of the argument is passed to the parameter. This is referred to as pass by value</string>
     <string name="q1_5">A variable defined inside a method is referred to as a local variable</string>
+
     <string name="q2_1">An object represents an entity in the real world that can be distinctly identified</string>
     <string name="q2_2">A class is a construct that defines objects of the same type</string>
     <string name="q2_3">They keyword class is required to declare a class</string>
     <string name="q2_4">A method with a return type is invoked to create an object</string>
     <string name="q2_5">A method that is associated with an individual object is called an object method</string>
+
     <string name="q3_1">Object-oriented programming allows you to derive new classes from existing classes. This is called abstraction</string>
     <string name="q3_2">You cannot invoke a method in superclass\'s parent class</string>
     <string name="q3_3">A constructor may be static</string>
     <string name="q3_4">A constructor may not invoke an overloaded constructor</string>
     <string name="q3_5">A constructor invokes its superclass no-arg constructor by default if a constructor does not invoke an overloaded constructor or its superclass\'s constructor</string>
+
     <string name="q4_1">Every JavaFX main class extends javafx.application.Application</string>
     <string name="q4_2">A node can be placed in a scene</string>
     <string name="q4_3">To add a circle object into a pane, use: pane.getChildren().add(circle);</string>
     <string name="q4_4">A Shape can be placed in a Control</string>
     <string name="q4_5">To add a radio button into a pane, use: pane.getaddAll(button);</string>
+
     <string name="q5_1">A java exception is an instance of RuntimeException</string>
     <string name="q5_2">An instance of Exception describes the errors caused by your program and external circumstances</string>
     <string name="q5_3">An instance of NumberFormatException describes system errors</string>
     <string name="q5_4">An instance of RuntimeException describes programming errors, such as bad casting and numeric errors</string>
     <string name="q5_5">The following code causes Java to throw no exceptions:
         int number = Integer.MAX_VALUE + 1;
-</string>
-
+    </string>
     <string name="q6_1">To register a source for an action event with a handler, use source.setOnAction(handler)</string>
     <string name="q6_2">To handle the mouse click event on a pane p, register the handler with p using p.setOnKeyClicked(handler); </string>
     <string name="q6_3">To handle the key pressed event on a pane p, register the handler with p using: p.setOnKeyClicked(handler); </string>

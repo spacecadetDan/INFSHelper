@@ -3,12 +3,14 @@ package com.example.dan.infshelper;
 public class Topic {
     public int id;
     public String name;
-    public String degree;
+    public String desc;
+    public String vid;
 
-    public Topic(int id, String name, String degree) {
+    public Topic(int id, String name, String desc, String vid) {
         this.id = id;
         this.name = name;
-        this.degree = degree;
+        this.desc = desc;
+        this.vid = vid;
     }
 
     @Override
@@ -28,15 +30,12 @@ public class Topic {
         return name;
     }
 
+    public String getDesc() { return desc; }
+
+    public String getVid() { return vid; }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getDegree() {
-        return degree;
-    }
-
-    public void setDegree(String degree) {
-        this.degree = degree;
-    }
 }
