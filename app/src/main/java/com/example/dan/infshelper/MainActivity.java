@@ -3,7 +3,6 @@ package com.example.dan.infshelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import static com.example.dan.infshelper.Database.getTopicArrayList;
+import static com.example.dan.infshelper.Array.getTopicArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static final String USER_ID = "";
@@ -21,12 +20,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListView lv = (ListView) findViewById(R.id.dynamicList);
+        ListView lv = findViewById(R.id.dynamicList);
 
-        ArrayAdapter<Topic> arrayAdapter = new ArrayAdapter<Topic>(
+        ArrayAdapter<Topic> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_expandable_list_item_1,
                 getTopicArrayList());
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

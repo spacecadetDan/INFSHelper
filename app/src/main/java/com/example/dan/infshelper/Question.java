@@ -18,12 +18,5 @@ public class Question {
         return mAnswerTrue;
     }
 
-    public void setmTextResID(int id) {
-        id = mTextResID;
-    }
-
-    public void setmAnswerTrue(boolean answer) {
-        answer = mAnswerTrue;
-    }
 
 }
