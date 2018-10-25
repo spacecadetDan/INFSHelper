@@ -16,60 +16,66 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 public class DetailActivity extends AppCompatActivity implements YouTubePlayer.OnInitializedListener {
-    public static final String USER_ID = "";
-    private int userID = -1;
+    public static final String TOPIC_ID = "";
+    private int topicID = -1;
     private static String src = "";
     public YouTubePlayerSupportFragment frag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Display a back button in top left
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        final String message = intent.getStringExtra(MainActivity.USER_ID);
-        userID = Integer.parseInt(message);
+        final String message = intent.getStringExtra(MainActivity.TOPIC_ID);
+        topicID = Integer.parseInt(message);
 
-        Topic topic = Array.getTopicById(userID);
+        Topic topic = Array.getTopicById(topicID);
 
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.resultText);
         TextView descView = findViewById(R.id.descText);
-        System.out.println("Topic ID, name and degree "+topic.getId()+" "+topic.getName());
+        //For developer to check the correct information has been parsed to this activity
+        System.out.println("Topic ID, name and degree " + topic.getId() + " " + topic.getName());
+        //set the ID to parse in intent as the topic ID
         final int parseID = topic.getId();
         textView.setText(topic.getName());
         descView.setText(topic.getDesc());
-
+        //create YouTube video fragment
         frag = (YouTubePlayerSupportFragment) getSupportFragmentManager().findFragmentById(R.id.youtube_fragment);
-        src=topic.getVid();
+        //get video reference from topic array dependent on what topic was selected
+        src = topic.getVid();
+        //initialise the video
         frag.initialize(DeveloperKey.DEVELOPER_KEY, this);
 
+        //quiz launch button
         Button quiz = findViewById(R.id.quizLaunch);
-            quiz.setOnClickListener(new View.OnClickListener() {
+        quiz.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(DetailActivity.this, QuizActivity.class);
-                    intent.putExtra(USER_ID, parseID + "");
-                    startActivity(intent);
-                }
-            });
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailActivity.this, QuizActivity.class);
+                //parse topic ID so quiz knows what questions to show
+                intent.putExtra(TOPIC_ID, parseID + "");
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
-
-
-            youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
-            youTubePlayer.loadVideo(src);
-
+        //set player as default and load the video
+        youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
+        youTubePlayer.loadVideo(src);
     }
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        // YouTube error
+        // YouTube error handling
         String errorMessage = youTubeInitializationResult.toString();
         Toast.makeText(getApplicationContext(), "YouTube failed to load", Toast.LENGTH_LONG).show();
         Log.d("errorMessage:", errorMessage);
@@ -77,14 +83,16 @@ public class DetailActivity extends AppCompatActivity implements YouTubePlayer.O
 
     @Override
     public void onBackPressed() {
+        //return to the MainActivity
         super.onBackPressed();
+        //horizontal transition
         overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
+            // Respond to the action bar's Up/Home button and return to MainActivity
             case android.R.id.home:
                 Intent intent = new Intent(DetailActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -95,8 +103,4 @@ public class DetailActivity extends AppCompatActivity implements YouTubePlayer.O
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }

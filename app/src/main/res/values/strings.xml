@@ -11,7 +11,7 @@
 
     <string name="q2_1">An object represents an entity in the real world that can be distinctly identified</string>
     <string name="q2_2">A class is a construct that defines objects of the same type</string>
-    <string name="q2_3">They keyword class is required to declare a class</string>
+    <string name="q2_3">The keyword class is required to declare a class</string>
     <string name="q2_4">A method with a return type is invoked to create an object</string>
     <string name="q2_5">A method that is associated with an individual object is called an object method</string>
 

@@ -5,7 +5,7 @@ public class Topic {
     public String name;
     public String desc;
     public String vid;
-
+    //describe what a topic requires
     public Topic(int id, String name, String desc, String vid) {
         this.id = id;
         this.name = name;
@@ -13,29 +13,29 @@ public class Topic {
         this.vid = vid;
     }
 
-    @Override
+    //return topic name as a string
     public String toString() {
         return name;
     }
 
+    //get topic id
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    //get topic name
     public String getName() {
         return name;
     }
 
-    public String getDesc() { return desc; }
+    //get topic description
+    public String getDesc() {
+        return desc;
+    }
 
-    public String getVid() { return vid; }
-
-    public void setName(String name) {
-        this.name = name;
+    //get topic youtube code
+    public String getVid() {
+        return vid;
     }
 
 }
