@@ -29,7 +29,6 @@ public class LaunchActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_launch);
 
-
         ImageView loadImg = findViewById(R.id.imageView);
         // Find the root view
         View root = loadImg.getRootView();
@@ -37,6 +36,7 @@ public class LaunchActivity extends AppCompatActivity {
         // Set the color
         root.setBackgroundColor(getResources().getColor(android.R.color.white));
         ConstraintLayout fullPage = findViewById(R.id.fullLayout);
+        // Move to new activity if user taps anywhere on the screen
         fullPage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -47,16 +47,18 @@ public class LaunchActivity extends AppCompatActivity {
         });
         try {
             Glide.with(this)
+                    //Display loading animation and loop it once so that it stops after rotating fully once
                     .load(R.raw.loading_icon)
                     .into(new DrawableImageViewTarget(loadImg) {
-                        @Override public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                             if (resource instanceof GifDrawable) {
-                                ((GifDrawable)resource).setLoopCount(1);
+                                ((GifDrawable) resource).setLoopCount(1);
                             }
                             super.onResourceReady(resource, transition);
                         }
                     });
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println("Didn't load");
         }
 

@@ -2,20 +2,20 @@ package com.example.dan.infshelper;
 
 
 public class Question {
-    private int mTextResID;
-    private boolean mAnswerTrue;
-
+    private int textResID;
+    private boolean answerTrue;
+    //describe parameters for a question
     public Question(int stringReference, boolean answer) {
-        mTextResID = stringReference;
-        mAnswerTrue = answer;
+        textResID = stringReference;
+        answerTrue = answer;
     }
-
-    public int getmTextResID() {
-        return mTextResID;
+    //return question
+    public int getTextResID() {
+        return textResID;
     }
-
-    public boolean getmAnswerTrue() {
-        return mAnswerTrue;
+    //return answer of question
+    public boolean getAnswerTrue() {
+        return answerTrue;
     }
 
 

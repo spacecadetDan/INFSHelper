@@ -2,7 +2,7 @@ package com.example.dan.infshelper;
 
 import java.util.ArrayList;
 
-// Array of topics
+// Array of topics, descriptions and youtube links
 public class Array {
     private static ArrayList<Topic> topicArrayList = new ArrayList<Topic>() {{
         add(new Topic(1, "Java fundamentals",

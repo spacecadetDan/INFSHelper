@@ -14,7 +14,8 @@ import android.widget.Toast;
 import static com.example.dan.infshelper.Array.getTopicArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String USER_ID = "";
+    //user ID needs to be parsed in intents as a string
+    public static final String TOPIC_ID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,29 +23,34 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //list of topics from topic array
         ListView lv = findViewById(R.id.dynamicList);
-
         ArrayAdapter<Topic> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_expandable_list_item_1,
+                //retrieve the array
                 getTopicArrayList());
+        //adapt listview to array
         lv.setAdapter(arrayAdapter);
+        //set a listener on each item in list
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                //get the topic that was clicked from the activity
                 Topic selectedItem = (Topic) parent.getItemAtPosition(position);
-                intent.putExtra(USER_ID, selectedItem.getId() + "");
+                //send the topic ID to the detail activity
+                intent.putExtra(TOPIC_ID, selectedItem.getId() + "");
                 startActivity(intent);
+                //add a horizontal slide transition
                 overridePendingTransition(R.anim.enter, R.anim.exit);
 
 
             }
         });
-
+        //help/assistance button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

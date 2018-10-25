@@ -11,15 +11,16 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "";
     public Question[] quizArray = new Question[5];
-    private Button trueButton;
-    private Button falseButton;
-    private Button backButton;
     public int score;
     public int i = 0;
     public boolean isTrue;
-    private TextView question;
     public QuizQuestions questions = new QuizQuestions();
     public Topic topic;
+    private Button trueButton;
+    private Button falseButton;
+    private Button backButton;
+    private TextView question;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -28,62 +29,66 @@ public class QuizActivity extends AppCompatActivity {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
-        final String message = intent.getStringExtra(DetailActivity.USER_ID);
-        int userID = Integer.parseInt(message);
+        //retrieve parsed user ID string
+        final String message = intent.getStringExtra(DetailActivity.TOPIC_ID);
+        //set user ID as an int again
+        int topicID = Integer.parseInt(message);
 
-        System.out.println("user id is" + userID);
-
-        topic = Array.getTopicById(userID);
-        if(userID == 1) {
+        System.out.println("user id is" + topicID);
+        //retrieve list of topics by ID
+        topic = Array.getTopicById(topicID);
+        if (topicID == 1) {
             questions.fundamentalsQuiz();
-        }else if(userID == 2) {
+        } else if (topicID == 2) {
             questions.inheritanceQuiz();
-        }else if(userID == 3) {
+        } else if (topicID == 3) {
             questions.polyQuiz();
-        }else if(userID == 4) {
+        } else if (topicID == 4) {
             questions.javafxQuiz();
-        }else if(userID == 5) {
+        } else if (topicID == 5) {
             questions.exceptionQuiz();
-        }else if(userID == 6) {
+        } else if (topicID == 6) {
             questions.eventQuiz();
-        }else if(userID == 7) {
+        } else if (topicID == 7) {
             questions.databaseQuiz();
-        }else if(userID == 8) {
+        } else if (topicID == 8) {
             questions.reviewQuiz();
         }
+        //randomise order of questions
+        questions.shuffleArray(questions.questionArray);
+        //load array
         quizArray = questions.questionArray;
 
         question = findViewById(R.id.textView2);
-        question.setText(quizArray[i].getmTextResID());
-        isTrue = quizArray[i].getmAnswerTrue();
+        //set the question text
+        question.setText(quizArray[i].getTextResID());
+        //get the answers from array
+        isTrue = quizArray[i].getAnswerTrue();
         backButton = findViewById(R.id.backButton);
         trueButton = findViewById(R.id.trueButton);
 
         trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (i >= quizArray.length) {
-                    onFinish();
+                //check if the answer is true and display a toast appropriately
+                if (isTrue) {
+                    Toast.makeText(QuizActivity.this, "Correct!", Toast.LENGTH_LONG).show();
+                    score++;
                 } else {
-                    if (isTrue) {
-                        Toast.makeText(QuizActivity.this, "Correct!", Toast.LENGTH_LONG).show();
-                        score++;
-                    } else {
-                        Toast.makeText(QuizActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
-                    }
-                    try {
-                        if(i == quizArray.length) {
-                            onFinish();
-                        } else {
-                            i++;
-                            isTrue = quizArray[i].getmAnswerTrue();
-                            question.setText(quizArray[i].getmTextResID());
-                        }
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        e.printStackTrace();
+                    Toast.makeText(QuizActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
+                }
+                //try and catch the end of the quiz, since the length of the array will have been exceeded
+                try {
+                    if (i == quizArray.length) {
                         onFinish();
+                    } else {
+                        i++;
+                        isTrue = quizArray[i].getAnswerTrue();
+                        question.setText(quizArray[i].getTextResID());
                     }
-
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    e.printStackTrace();
+                    onFinish();
                 }
             }
         });
@@ -93,20 +98,21 @@ public class QuizActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                //check if the answer is false and display a toast appropriately
                 if (!isTrue) {
                     Toast.makeText(QuizActivity.this, "Correct!", Toast.LENGTH_LONG).show();
                     score++;
                 } else {
                     Toast.makeText(QuizActivity.this, "Incorrect", Toast.LENGTH_LONG).show();
                 }
-
+                //try and catch the end of the quiz, since the length of the array will have been exceeded
                 try {
-                    if(i == quizArray.length) {
+                    if (i == quizArray.length) {
                         onFinish();
                     } else {
                         i++;
-                        isTrue = quizArray[i].getmAnswerTrue();
-                        question.setText(quizArray[i].getmTextResID());
+                        isTrue = quizArray[i].getAnswerTrue();
+                        question.setText(quizArray[i].getTextResID());
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     e.printStackTrace();
@@ -118,24 +124,28 @@ public class QuizActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //intent to return to the main activity
                 Intent backIntent = new Intent(QuizActivity.this, MainActivity.class);
                 backIntent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(backIntent);
+                //horizontal transition animation
                 overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
             }
         });
     }
 
     private void onFinish() {
-        if(score == 5) {
+        //provide dynamic "finished" text
+        if (score == 5) {
             question.setText("WOOHOO!!! PERFECT SCORE: " + score + "/5 for " + topic.getName());
-        } else if(score >= 3) {
+        } else if (score >= 3) {
             question.setText("Nice work! You scored: " + score + "/5 for " + topic.getName());
-        } else if(score == 0) {
+        } else if (score == 0) {
             question.setText("Wow you scored " + score + "/5 for " + topic.getName() + "...better get back to revising");
         } else {
             question.setText("Uh oh... you only scored " + score + "/5 for " + topic.getName());
         }
+        //remove the true/false buttons and replace with a back button
         falseButton.setVisibility(View.INVISIBLE);
         trueButton.setVisibility(View.INVISIBLE);
         backButton.setVisibility(View.VISIBLE);
