@@ -16,7 +16,7 @@ import static com.example.dan.infshelper.Array.getTopicArrayList;
 public class MainActivity extends AppCompatActivity {
     //user ID needs to be parsed in intents as a string
     public static final String TOPIC_ID = "";
-
+    public static DatabaseHelper mDatabaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +50,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        mDatabaseHelper = new DatabaseHelper(this);
         //help/assistance button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Click on a topic of interest", Toast.LENGTH_SHORT).show();
+                //Navigate to score list
+                Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
+                startActivity(intent);
             }
         });
     }
