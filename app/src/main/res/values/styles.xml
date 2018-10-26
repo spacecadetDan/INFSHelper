@@ -18,6 +18,6 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="PinkButton" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/indigo</item>
-        <item name="colorButtonNormal">@color/pink</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
     </style>
 </resources>

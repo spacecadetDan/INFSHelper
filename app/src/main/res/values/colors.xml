@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#EB003B</color>
+    <color name="colorAccent">#eb003b</color>
     <color name="colorText">#4b4b4b</color>
-    <color name="pink">#E91E63</color>
+    <color name="pink">#e91e63</color>
     <color name="indigo">#4a148c</color>
 </resources>

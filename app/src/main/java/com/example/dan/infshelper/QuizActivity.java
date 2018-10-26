@@ -1,8 +1,10 @@
 package com.example.dan.infshelper;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.*;
 import android.view.View;
 import android.widget.Toast;
@@ -135,6 +137,9 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void onFinish() {
+        //Insert score to database row by the correct topic ID
+        MainActivity.mDatabaseHelper.updateScore(topic.getId(), score);
+
         //provide dynamic "finished" text
         if (score == 5) {
             question.setText("WOOHOO!!! PERFECT SCORE: " + score + "/5 for " + topic.getName());
@@ -150,4 +155,5 @@ public class QuizActivity extends AppCompatActivity {
         trueButton.setVisibility(View.INVISIBLE);
         backButton.setVisibility(View.VISIBLE);
     }
+
 }
